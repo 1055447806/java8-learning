@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author Gary
@@ -15,6 +16,7 @@ public class FindApple {
     /**
      * 策略模式接口
      */
+    @FunctionalInterface
     public interface AppleFilter {
         /**
          * 实现过滤的具体策略
@@ -147,6 +149,52 @@ public class FindApple {
                 return ("yellow".equals(apple.getColor()) && 120 == apple.getWeight());
             }
         });
+        System.out.println("apples = " + apples);
+    }
+
+    /**
+     * 使用 lambda 表达式进行实现
+     */
+    @Test
+    public void findAppleWithLambda() {
+        List<Apple> list = Arrays.asList(
+                new Apple("green", 150),
+                new Apple("yellow", 120),
+                new Apple("green", 170)
+        );
+        List<Apple> apples = findApple(list, apple -> ("yellow".equals(apple.getColor()) && 120 == apple.getWeight()));
+        System.out.println("apples = " + apples);
+    }
+
+    /**
+     * 使用 Predicate 实现
+     *
+     * @param apples    所有苹果
+     * @param predicate predicate 接口实现
+     * @return 过滤后的结果
+     */
+    public List<Apple> findAppleWithPredicate(List<Apple> apples, Predicate<Apple> predicate) {
+        List<Apple> result = new ArrayList<>();
+        for (Apple apple : apples) {
+            if (predicate.test(apple)) {
+                result.add(apple);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 使用 Predicate 实现
+     */
+    @SuppressWarnings("DuplicatedCode")
+    @Test
+    public void testFindAppleWithPredicate() {
+        List<Apple> list = Arrays.asList(
+                new Apple("green", 150),
+                new Apple("yellow", 120),
+                new Apple("green", 170)
+        );
+        List<Apple> apples = findAppleWithPredicate(list, apple -> ("yellow".equals(apple.getColor()) && 120 == apple.getWeight()));
         System.out.println("apples = " + apples);
     }
 }
