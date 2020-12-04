@@ -140,6 +140,7 @@ public class FindApple {
                 new Apple("yellow", 120),
                 new Apple("green", 170)
         );
+        @SuppressWarnings("Convert2Lambda")
         List<Apple> apples = findApple(list, new AppleFilter() {
             @Override
             public boolean filter(Apple apple) {
