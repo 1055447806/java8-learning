@@ -1,0 +1,151 @@
+package com.ohh.java8;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * @author Gary
+ */
+@SuppressWarnings("AlibabaTestClassShouldEndWithTestNaming")
+public class FindApple {
+
+    /**
+     * 策略模式接口
+     */
+    public interface AppleFilter {
+        /**
+         * 实现过滤的具体策略
+         *
+         * @param apple 被过滤的苹果
+         * @return 是否满足所需条件
+         */
+        boolean filter(Apple apple);
+    }
+
+    /**
+     * 策略：过滤颜色为绿色且重量为 150 的苹果
+     */
+    public static class GreenAnd150WeightFilter implements AppleFilter {
+        @Override
+        public boolean filter(Apple apple) {
+            return ("green".equals(apple.getColor()) && 150 == apple.getWeight());
+        }
+    }
+
+    /**
+     * 使用策略模式
+     *
+     * @param apples      所有苹果
+     * @param appleFilter 苹果的过滤器
+     * @return 所需的苹果
+     */
+    public static List<Apple> findApple(List<Apple> apples, AppleFilter appleFilter) {
+        List<Apple> list = new ArrayList<>();
+        for (Apple apple : apples) {
+            if (appleFilter.filter(apple)) {
+                list.add(apple);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 寻找绿色的苹果，颜色是硬编码
+     *
+     * @param apples 苹果
+     * @return 绿色苹果集合
+     */
+    public static List<Apple> findGreenApple(List<Apple> apples) {
+        List<Apple> list = new ArrayList<>();
+        for (Apple apple : apples) {
+            if ("green".equals(apple.getColor())) {
+                list.add(apple);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 寻找任意颜色的苹果
+     *
+     * @param apples 苹果
+     * @param color  苹果的颜色
+     * @return 绿色苹果集合
+     */
+    public static List<Apple> findApple(List<Apple> apples, String color) {
+        List<Apple> list = new ArrayList<>();
+        for (Apple apple : apples) {
+            if (color.equals(apple.getColor())) {
+                list.add(apple);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 测试 findGreenApple 方法
+     */
+    @Test
+    public void findGreenApple() {
+        List<Apple> list = Arrays.asList(
+                new Apple("green", 150),
+                new Apple("yellow", 120),
+                new Apple("green", 170)
+        );
+        List<Apple> greenApples = findGreenApple(list);
+        assert greenApples.size() == 2;
+        System.out.println(greenApples);
+    }
+
+    /**
+     * 测试 findApple 方法
+     */
+    @Test
+    public void findAnyColorApple() {
+        List<Apple> list = Arrays.asList(
+                new Apple("green", 150),
+                new Apple("yellow", 120),
+                new Apple("green", 170)
+        );
+        List<Apple> greenApples = findApple(list, "green");
+        List<Apple> yellowApples = findApple(list, "yellow");
+        System.out.println("greenApples = " + greenApples);
+        System.out.println("yellowApples = " + yellowApples);
+    }
+
+    /**
+     * 使用策略模式进行实现
+     */
+    @Test
+    public void findAppleWithStrategyPattern() {
+        List<Apple> list = Arrays.asList(
+                new Apple("green", 150),
+                new Apple("yellow", 120),
+                new Apple("green", 170)
+        );
+        List<Apple> apples = findApple(list, new GreenAnd150WeightFilter());
+        System.out.println("apples = " + apples);
+    }
+
+    /**
+     * 使用匿名内部类实现策略模式
+     */
+    @Test
+    public void findAppleWithAnonymousInnerClass() {
+        List<Apple> list = Arrays.asList(
+                new Apple("green", 150),
+                new Apple("yellow", 120),
+                new Apple("green", 170)
+        );
+        List<Apple> apples = findApple(list, new AppleFilter() {
+            @Override
+            public boolean filter(Apple apple) {
+                return ("yellow".equals(apple.getColor()) && 120 == apple.getWeight());
+            }
+        });
+        System.out.println("apples = " + apples);
+    }
+}
