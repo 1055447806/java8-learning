@@ -1,5 +1,6 @@
-package com.ohh.java8;
+package com.ohh.java8.lambda;
 
+import com.ohh.java8.entity.Apple;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,10 +9,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
+ * 如何在一堆苹果中挑选自己想要的苹果呢？
+ * 挑选苹果有多种方式
  * @author Gary
  */
 @SuppressWarnings("AlibabaTestClassShouldEndWithTestNaming")
-public class FindApple {
+public class HowToFindApple {
 
     /**
      * 策略模式接口

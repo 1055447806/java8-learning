@@ -1,5 +1,6 @@
-package com.ohh.java8;
+package com.ohh.java8.lambda;
 
+import com.ohh.java8.entity.Apple;
 import org.junit.Test;
 
 import java.util.function.*;
@@ -9,7 +10,8 @@ import java.util.function.*;
  *
  * @author Gary
  */
-public class CreateFunctionInterfaces {
+@SuppressWarnings("AlibabaTestClassShouldEndWithTestNaming")
+public class CreateSomeFunctionInterfaces {
 
     /**
      * Function

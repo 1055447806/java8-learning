@@ -1,4 +1,4 @@
-package com.ohh.java8;
+package com.ohh.java8.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

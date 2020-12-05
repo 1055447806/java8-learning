@@ -1,5 +1,6 @@
-package com.ohh.java8;
+package com.ohh.java8.lambda;
 
+import com.ohh.java8.entity.Apple;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -11,7 +12,7 @@ import java.util.Comparator;
  */
 
 @SuppressWarnings("AlibabaTestClassShouldEndWithTestNaming")
-public class LambdaExpression {
+public class HelloLambdaExpression {
 
     /**
      * 使用匿名内部类
