@@ -7,6 +7,7 @@ import org.junit.Test;
  *
  * @author Gary
  */
+@SuppressWarnings("AlibabaTestClassShouldEndWithTestNaming")
 public class HowToCreateThread {
 
     /**
